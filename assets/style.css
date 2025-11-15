@@ -8,10 +8,10 @@ body{background:var(--bg-color);color:#222;}
 .site-header{display:flex;align-items:center;justify-content:center;padding:28px 16px;border-bottom:1px solid rgba(0,0,0,0.06);} 
 .logo-link{display:inline-block;text-decoration:none;}
 .logo-text{
-  font-family: 'Rock Salt', cursive;
+  font-family: 'VT323', monospace;
   font-weight:400;
   color:var(--logo-color);
-  font-size: clamp(28px, 8vw, 96px);
+  font-size: 40px;
   line-height:1;
   letter-spacing:0.5px;
   text-transform:none;
