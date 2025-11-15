@@ -27,21 +27,12 @@ body{background:var(--bg-color);color:#222;}
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 .site-main{max-width:900px;margin:48px auto;padding:0 16px;}
-.screen-time-calculator {
-  margin-top: 30px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  max-width: 400px;
+.screen-time-calculator h2 {
+  font-family: 'VT323', monospace;
+  font-size: 32px;
 }
 
-.screen-time-calculator input {
-  width: 100%;
-  padding: 8px;
-  margin: 8px 0 12px;
-}
-
+.screen-time-calculator input,
 .screen-time-calculator button {
-  padding: 8px 16px;
-  cursor: pointer;
+  font-family: 'VT323', monospace;
 }
