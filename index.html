@@ -28,36 +28,46 @@ The brain must have time for quiet. The brain must try relying on itself. The br
 Life moves fast when you’re not looking. We urge you to look once again. <br><br>
 
       
-We are the Harvard College Neo-Luddites.  <br><br><br><br> <br><br><br><br> <br><br><br><br> <br><br><br><br>
+We are the Harvard College Neo-Luddites.  <br><br><br><br> 
       
 </p>
-    <section class="screen-time-calculator">
+   <section class="screen-time-calculator">
   <h2>Lifetime Screen Time Calculator</h2>
 
   <label for="dailyHours">Average Daily Screen Time (hours):</label>
-  <input type="number" id="dailyHours" min="0" step="0.1" />
+  <input type="number" id="dailyHours" min="0" step="0.1" placeholder="e.g. 6" />
 
-  <button onclick="calculateLifetime()">Calculate</button>
+  <button id="calcBtn">Calculate</button>
 
-  <p id="result"></p>
+  <p id="result" aria-live="polite"></p>
 </section>
 <script>
+document.getElementById('calcBtn').addEventListener('click', calculateLifetime);
+
 function calculateLifetime() {
-    const dailyHours = parseFloat(document.getElementById("dailyHours").value);
+    const input = document.getElementById("dailyHours").value;
+    const dailyHours = parseFloat(input);
 
     if (isNaN(dailyHours) || dailyHours < 0) {
-        document.getElementById("result").textContent = 
-            "Please enter a valid number.";
+        document.getElementById("result").textContent = "Please enter a valid non-negative number.";
         return;
     }
 
-    const years = (dailyHours * 365 * 85) / 24;
-    const roundedYears = years.toFixed(2);
+    // total hours over an 85-year lifetime
+    const totalHours = dailyHours * 365 * 85;
 
-    document.getElementById("result").textContent = 
-        `At this rate, you will spend about ${roundedYears} full years on screens over an 85-year lifetime.`;
+    // convert hours to years by dividing by hours-per-year (24 * 365 = 8760)
+    const years = totalHours / (24 * 365);
+
+    const roundedYears = Number(years.toFixed(2));
+    const percentOf85 = Number(((roundedYears / 85) * 100).toFixed(2));
+
+    document.getElementById("result").textContent =
+        `At ${dailyHours} hours/day you will spend about ${roundedYears} years on screens over an 85-year lifetime (` +
+        `${percentOf85}% of that lifespan).`;
 }
 </script>
+    <br><br><br><br> <br><br><br><br> <br><br><br><br><br><br><br><br> <br><br><br><br> <br><br><br><br>
   </main>
 </body>
 </html>
