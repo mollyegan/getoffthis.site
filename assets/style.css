@@ -27,35 +27,53 @@ body{background:var(--bg-color);color:#222;}
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 .site-main{max-width:900px;margin:48px auto;padding:0 16px;}
-.screen-time-calculator h2 {
-  font-family: 'VT323', monospace;
-  font-size: 32px;
-}
-
 .screen-time-calculator {
   font-family: 'VT323', monospace;
   font-size: 22px;
   background: #000;
-  color: #33ff33;
+  color: #fff;            /* WHITE TEXT */
   padding: 20px;
   border-radius: 8px;
   max-width: 400px;
+  margin: 40px auto;      /* CENTER ON PAGE */
+  text-align: center;     /* CENTER TEXT */
 }
 
-.screen-time-calculator input,
-.screen-time-calculator button {
+.screen-time-calculator label {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.screen-time-calculator input {
   font-family: 'VT323', monospace;
   font-size: 20px;
   padding: 6px 10px;
-  margin-top: 10px;
+  margin-bottom: 14px;
+  width: 80%;
 }
 
 .screen-time-calculator button {
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  padding: 6px 18px;
   cursor: pointer;
-  background: #111;
-  color: #33ff33;
-  border: 1px solid #33ff33;
+  background: #222;
+  color: #fff;           /* WHITE BUTTON TEXT */
+  border: 1px solid #fff;
+  border-radius: 4px;
+  margin-top: 12px;
 }
+
+.screen-time-calculator button:hover {
+  background: #444;
+}
+
+.screen-time-calculator #result {
+  margin-top: 18px;
+  font-size: 24px;
+  color: #fff;           /* WHITE RESULT TEXT */
+}
+
 
 .zine-title {
   font-family: 'VT323', monospace;
