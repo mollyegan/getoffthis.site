@@ -1,88 +1,70 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>getoffthis.site</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/style.css">
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
-  <header class="site-header">
-    <a class="logo-link" href="/">
-      <span class="logo-text">getoffthis.site</span>
-    </a>
-  </header>
-<main class="site-main">
 
-  <p><a href="/zine.html">See our Zine →</a></p>
+<header class="site-header">
+  <a class="logo-link" href="/">
+    <span class="logo-text">getoffthis.site</span>
+  </a>
+</header>
 
-  <div class="home-layout">
+<main class="site-main calculator-only">
 
-    <!-- LEFT SIDE: REVOLUTION TEXT -->
-    <div class="home-text">
-      <p class="revolution-text">
-        Revolution.<br><br>
+  <section class="screen-time-calculator">
+    <h2>Lifetime Screen Time Calculator</h2>
 
-        12 years on earth. <br><br>
-        Imagine the younger you, on the cusp of teenage-hood. It has been 12 years, and what have you accomplished?<br><br> 
+    <label for="dailyHours">Average Daily Screen Time (hours):</label>
+    <input type="number" id="dailyHours" min="0" step="0.1" placeholder="e.g. 6" />
 
-        Those days, you learned something new every day. Life held nothing but intrigue as it unfolded its inner workings to you. You grew in inches and in skill. There were 12 years of knowing, of being-with, of remembering birthdays and forgetting regrets. For some, 12 years is a lifetime, constructed in compositions of sleep, talk, stepping, laughter, looking around and thinking backwards. Any interval of 12 years on earth will do that to you: like it or not, you’re there. <br><br>
+    <button id="calcBtn">Calculate</button>
 
-        The average member of GenZ will spend 12 years of life on a phone. 5 hours a day for the rest of a long-ish life multiples up to 109,500 hours. That’s 12 years of time, attention, care, boiled down to a black box of memory where all that can be shown for is obscurity. <br><br>
-
-        The constant stimulation provided by excessive screen use has rewired your brain. You take the task of focus and attention to be an unachievable status. You move through the world with eyes glued and ears plugged. You see the stranger as shut off: you resolve to log-on. The Real World has ceased to be stimulating. The World as you know it is mediated through tangles of algorithmic programming and flashes of ordered numbers. Your faith is in what is on hand. 12 years, and you have forgotten to think.<br><br> 
-
-        The brain must have time for quiet. The brain must try relying on itself. The brain must be in a constant dialogue with its living reality. And the brain must understand the severity of 12 years lost to artificial brightness. <br><br>
-
-        Life moves fast when you’re not looking. We urge you to look once again. <br><br>
-
-        We are the Harvard College Neo-Luddites. <br><br>
-      </p>
-    </div>
-
-
-    <!-- RIGHT SIDE: SCREEN TIME CALCULATOR -->
-    <section class="screen-time-calculator">
-      <h2>Lifetime Screen Time Calculator</h2>
-
-      <label for="dailyHours">Average Daily Screen Time (hours):</label>
-      <input type="number" id="dailyHours" min="0" step="0.1" placeholder="e.g. 6" />
-
-      <button id="calcBtn">Calculate</button>
-
-      <p id="result" aria-live="polite"></p>
-    </section>
-
-  </div>
-
-  <script>
-  document.getElementById('calcBtn').addEventListener('click', calculateLifetime);
-
-  function calculateLifetime() {
-      const input = document.getElementById("dailyHours").value;
-      const dailyHours = parseFloat(input);
-
-      if (isNaN(dailyHours) || dailyHours < 0) {
-          document.getElementById("result").textContent = "Please enter a valid non-negative number.";
-          return;
-      }
-
-      const totalHours = dailyHours * 365 * 85;
-      const years = totalHours / (24 * 365);
-      const roundedYears = Number(years.toFixed(2));
-      const percentOf85 = Number(((roundedYears / 85) * 100).toFixed(2));
-
-      document.getElementById("result").textContent =
-          `At ${dailyHours} hours/day you will spend about ${roundedYears} years on screens over an 85-year lifetime (` +
-          `${percentOf85}% of that lifespan).`;
-  }
-  </script>
+    <p id="result" aria-live="polite"></p>
+  </section>
 
 </main>
+
+<script>
+// AUTO-REDIRECT IF USER ALREADY CALCULATED BEFORE
+const storedYears = localStorage.getItem("calculatedYears");
+if (storedYears !== null) {
+    window.location.href = "/revolution.html";
+}
+
+// CALCULATOR LOGIC
+document.getElementById("calcBtn").addEventListener("click", calculateLifetime);
+
+function calculateLifetime() {
+    const input = document.getElementById("dailyHours").value;
+    const dailyHours = parseFloat(input);
+
+    if (isNaN(dailyHours) || dailyHours < 0) {
+        document.getElementById("result").textContent = "Please enter a valid non-negative number.";
+        return;
+    }
+
+    const totalHours = dailyHours * 365 * 85;
+    const years = totalHours / (24 * 365);
+    const roundedYears = Number(years.toFixed(2));
+
+    // Save to localStorage
+    localStorage.setItem("calculatedYears", roundedYears);
+
+    // Redirect to revolution page
+    window.location.href = "/revolution.html";
+}
+</script>
 
 </body>
 </html>
