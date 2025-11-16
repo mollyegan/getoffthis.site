@@ -1,70 +1,102 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>getoffthis.site</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Off This Site</title>
+  <link rel="stylesheet" href="assets/style.css">
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/assets/style.css">
+  <style>
+    body {
+      background: #fff;
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .calculator-box {
+      background: rgba(0,0,0,0.8);
+      padding: 30px;
+      border-radius: 12px;
+      width: 340px;
+      color: white;
+      font-family: 'VT323', monospace;
+      font-size: 22px;
+    }
+
+    label, input, button {
+      display: block;
+      width: 100%;
+      margin-top: 12px;
+      font-family: 'VT323', monospace;
+      font-size: 22px;
+    }
+
+    input {
+      padding: 6px;
+      border-radius: 6px;
+      border: none;
+    }
+
+    button {
+      background: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 16px;
+    }
+
+    #resultMessage {
+      margin-top: 18px;
+      font-size: 22px;
+      line-height: 1.4;
+      white-space: pre-line;
+    }
+  </style>
+
 </head>
 <body>
 
-<header class="site-header">
-  <a class="logo-link" href="/">
-    <span class="logo-text">getoffthis.site</span>
-  </a>
-</header>
+  <div class="calculator-box">
+    <h2>Screen Time Calculator</h2>
 
-<main class="site-main calculator-only">
+    <label for="hours">Average hours per day:</label>
+    <input type="number" id="hours" min="0" step="0.1">
 
-  <section class="screen-time-calculator">
-    <h2>Lifetime Screen Time Calculator</h2>
+    <button onclick="calculate()">Calculate</button>
 
-    <label for="dailyHours">Average Daily Screen Time (hours):</label>
-    <input type="number" id="dailyHours" min="0" step="0.1" placeholder="e.g. 6" />
+    <div id="resultMessage"></div>
+  </div>
 
-    <button id="calcBtn">Calculate</button>
-
-    <p id="result" aria-live="polite"></p>
-  </section>
-
-</main>
-
-<script>
-// AUTO-REDIRECT IF USER ALREADY CALCULATED BEFORE
-const storedYears = localStorage.getItem("calculatedYears");
-if (storedYears !== null) {
-    window.location.href = "/revolution.html";
-}
-
-// CALCULATOR LOGIC
-document.getElementById("calcBtn").addEventListener("click", calculateLifetime);
-
-function calculateLifetime() {
-    const input = document.getElementById("dailyHours").value;
-    const dailyHours = parseFloat(input);
-
-    if (isNaN(dailyHours) || dailyHours < 0) {
-        document.getElementById("result").textContent = "Please enter a valid non-negative number.";
+  <script>
+    function calculate() {
+      const hours = parseFloat(document.getElementById("hours").value);
+      if (isNaN(hours) || hours < 0) {
+        alert("Please enter a valid number.");
         return;
+      }
+
+      const years = (hours * 365 * 85) / 24;
+
+      const msg = `At ${hours} hours a day, you will spend ${years.toFixed(2)} years of an 85 year lifetime.`;
+
+      document.getElementById("resultMessage").innerText = msg;
+
+      // store years for next page
+      localStorage.setItem("calculatedYears", years.toFixed(2));
+
+      // redirect after a pause
+      setTimeout(() => {
+        window.location.href = "revolution.html";
+      }, 3200);
     }
-
-    const totalHours = dailyHours * 365 * 85;
-    const years = totalHours / (24 * 365);
-    const roundedYears = Number(years.toFixed(2));
-
-    // Save to localStorage
-    localStorage.setItem("calculatedYears", roundedYears);
-
-    // Redirect to revolution page
-    window.location.href = "/revolution.html";
-}
-</script>
+  </script>
 
 </body>
 </html>
