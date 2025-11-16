@@ -1,79 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Revolution — getoffthis.site</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Revolution</title>
+  <link rel="stylesheet" href="assets/style.css">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="/assets/style.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, sans-serif;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+    }
+    .content {
+      max-width: 700px;
+      font-size: 20px;
+      line-height: 1.6;
+      margin: 60px 20px;
+    }
+  </style>
 </head>
+
 <body>
+  <div class="content">
+    <p><span id="dynamicYears">12</span> years on earth. Imagine the younger you, on the cusp of teenage-hood. It has been <span id="dynamicYears2">12</span> years, and what have you accomplished?</p>
 
-<header class="site-header">
-  <a class="logo-link" href="/">
-    <span class="logo-text">getoffthis.site</span>
-  </a>
-</header>
+    <p>Those days, you learned something new every day. Life held nothing but intrigue as it unfolded its inner workings to you. You grew in inches and in skill. There were 12 years of knowing, of being-with, of remembering birthdays and forgetting regrets. For some, <span id="dynamicYears3">12</span> years is a lifetime, constructed in compositions of sleep, talk, stepping, laughter, looking around and thinking backwards. Any interval of <span id="dynamicYears4">12</span> years on earth will do that to you: like it or not, you’re there.</p>
 
-<main class="site-main">
+    <p>The average member of GenZ will spend <span id="dynamicYears5">12</span> years of life on a phone. 5 hours a day for the rest of a long-ish life multiples up to 109,500 hours. That’s <span id="dynamicYears6">12</span> years of time, attention, care, boiled down to a black box of memory where all that can be shown for is obscurity.</p>
 
-  <p><a href="/zine.html">See our Zine →</a></p>
+    <p>The constant stimulation provided by excessive screen use has rewired your brain. You take the task of focus and attention to be an unachievable status. You move through the world with eyes glued and ears plugged. You see the stranger as shut off: you resolve to log-on. The Real World has ceased to be stimulating. The World as you know it is mediated through tangles of algorithmic programming and flashes of ordered numbers. Your faith is in what is on hand. <span id="dynamicYears7">12</span> years, and you have forgotten to think.</p>
 
-  <div class="home-layout">
-    <div class="home-text">
+    <p>The brain must have time for quiet. The brain must try relying on itself. The brain must be in a constant dialogue with its living reality. And the brain must understand the severity of <span id="dynamicYears8">12</span> years lost to artificial brightness.</p>
 
-      <p class="revolution-text">
-        Revolution.<br><br>
+    <p>Life moves fast when you’re not looking. We urge you to look once again.</p>
 
-        <span class="yearsVal">12</span> years on earth. <br><br>
-
-        Imagine the younger you, on the cusp of teenage-hood. It has been 
-        <span class="yearsVal">12</span> years, and what have you accomplished?<br><br>
-
-        Those days, you learned something new every day. Life held nothing but intrigue as it unfolded its inner workings to you. You grew in inches and in skill. There were 
-        <span class="yearsVal">12</span> years of knowing, of being-with, of remembering birthdays and forgetting regrets. For some, 
-        <span class="yearsVal">12</span> years is a lifetime, constructed in compositions of sleep, talk, stepping, laughter, looking around and thinking backwards. Any interval of 
-        <span class="yearsVal">12</span> years on earth will do that to you: like it or not, you’re there. <br><br>
-
-        The average member of GenZ will spend 
-        <span class="yearsVal">12</span> years of life on a phone. 5 hours a day for the rest of a long-ish life multiples up to 109,500 hours. That’s 
-        <span class="yearsVal">12</span> years of time, attention, care, boiled down to a black box of memory where all that can be shown for is obscurity. <br><br>
-
-        The constant stimulation provided by excessive screen use has rewired your brain. You take the task of focus and attention to be an unachievable status. You move through the world with eyes glued and ears plugged. You see the stranger as shut off: you resolve to log-on. The Real World has ceased to be stimulating. The World as you know it is mediated through tangles of algorithmic programming and flashes of ordered numbers. Your faith is in what is on hand. 
-        <span class="yearsVal">12</span> years, and you have forgotten to think.<br><br>
-
-        The brain must have time for quiet. The brain must try relying on itself. The brain must be in a constant dialogue with its living reality. And the brain must understand the severity of 
-        <span class="yearsVal">12</span> years lost to artificial brightness. <br><br>
-
-        Life moves fast when you’re not looking. We urge you to look once again. <br><br>
-
-        We are the Harvard College Neo-Luddites. <br><br>
-      </p>
-
-    </div>
+    <p><strong>We are the Harvard College Neo-Luddites.</strong></p>
   </div>
 
-</main>
+  <script>
+    const val = localStorage.getItem("calculatedYears");
 
-<script>
-// Load years value from localStorage
-const years = localStorage.getItem("calculatedYears");
-
-// If no saved value, send back to index.html
-if (years === null) {
-    window.location.href = "/";
-}
-
-// Replace all instances of <span class="yearsVal">12</span>
-document.querySelectorAll(".yearsVal").forEach(span => {
-    span.textContent = years;
-});
-</script>
+    if (val) {
+      document.querySelectorAll("#dynamicYears, #dynamicYears2, #dynamicYears3, #dynamicYears4, #dynamicYears5, #dynamicYears6, #dynamicYears7, #dynamicYears8")
+        .forEach(el => el.textContent = val);
+    }
+  </script>
 
 </body>
 </html>
-
