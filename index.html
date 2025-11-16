@@ -1,102 +1,180 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Get Off This Site</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>getoffthis.site</title>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Optional: your global stylesheet (keeps existing site styles) -->
+  <link rel="stylesheet" href="/assets/style.css">
 
   <style>
-    body {
-      background: #fff;
-      margin: 0;
-      font-family: system-ui, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+    /* Header/logo that appears on all pages */
+    .site-header {
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:18px 12px;
+      border-bottom:1px solid rgba(0,0,0,0.06);
+    }
+    .logo-text {
+      font-family: 'VT323', monospace;
+      font-size: 40px;           /* 40px as requested */
+      line-height: 1;
+      color: #111;
+      text-decoration: none;
+    }
+
+    /* Center page content */
+    .site-main {
+      max-width: 1100px;
+      margin: 36px auto;
+      padding: 0 16px;
+    }
+
+    /* Calculator box */
+    .screen-time-calculator {
+      font-family: 'VT323', monospace;
+      font-size: 20px;
+      background: #000;
+      color: #fff;
+      padding: 22px;
+      border-radius: 8px;
+      max-width: 420px;
+      margin: 28px auto 0;
       text-align: center;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.15);
     }
 
-    .calculator-box {
-      background: rgba(0,0,0,0.8);
-      padding: 30px;
-      border-radius: 12px;
-      width: 340px;
-      color: white;
-      font-family: 'VT323', monospace;
-      font-size: 22px;
+    .screen-time-calculator label {
+      display:block;
+      margin-bottom:8px;
+      font-size:18px;
     }
 
-    label, input, button {
-      display: block;
-      width: 100%;
-      margin-top: 12px;
-      font-family: 'VT323', monospace;
-      font-size: 22px;
-    }
-
-    input {
-      padding: 6px;
+    .screen-time-calculator input {
+      width: 88%;
+      padding: 8px;
+      font-size: 18px;
       border-radius: 6px;
-      border: none;
+      border: 1px solid #333;
+      margin-bottom: 12px;
+      background:#111;
+      color:#fff;
     }
 
-    button {
-      background: white;
-      border: none;
-      padding: 10px;
+    .screen-time-calculator button {
+      font-family: 'VT323', monospace;
+      font-size: 18px;
+      padding: 10px 16px;
+      border-radius: 6px;
+      border: 1px solid #fff;
+      background: #111;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .screen-time-calculator .next-btn {
+      display: inline-block;
+      margin-top: 14px;
+      background: #2b2b2b;
+      border: 1px solid #fff;
+      padding: 10px 16px;
       border-radius: 6px;
       cursor: pointer;
-      margin-top: 16px;
     }
 
-    #resultMessage {
-      margin-top: 18px;
-      font-size: 22px;
-      line-height: 1.4;
-      white-space: pre-line;
+    .screen-time-calculator #result {
+      margin-top: 16px;
+      font-size: 18px;
+      min-height: 44px;
+    }
+
+    /* Keep layout comfortable on small screens */
+    @media (max-width: 700px) {
+      .screen-time-calculator { width: 92%; padding: 18px; }
+      .logo-text { font-size: 34px; }
     }
   </style>
-
 </head>
+
 <body>
+  <header class="site-header">
+    <a class="logo-link" href="/">
+      <span class="logo-text">getoffthis.site</span>
+    </a>
+  </header>
 
-  <div class="calculator-box">
-    <h2>Screen Time Calculator</h2>
+  <main class="site-main">
+    <p><a href="/zine.html">See our Zine →</a></p>
 
-    <label for="hours">Average hours per day:</label>
-    <input type="number" id="hours" min="0" step="0.1">
+    <section class="screen-time-calculator" aria-labelledby="calcHeading">
+      <h2 id="calcHeading" style="margin:0 0 12px;">Lifetime Screen Time Calculator</h2>
 
-    <button onclick="calculate()">Calculate</button>
+      <label for="dailyHours">Average Daily Screen Time (hours):</label>
+      <input type="number" id="dailyHours" min="0" step="0.1" placeholder="e.g. 6" aria-label="Average daily screen time in hours">
 
-    <div id="resultMessage"></div>
-  </div>
+      <div>
+        <button id="calcBtn" aria-describedby="result">Calculate</button>
+        <!-- Next button is hidden until a valid calculation is made -->
+        <button id="nextBtn" class="next-btn" style="display:none;" aria-hidden="true">Next →</button>
+      </div>
+
+      <p id="result" role="status" aria-live="polite"></p>
+    </section>
+  </main>
 
   <script>
-    function calculate() {
-      const hours = parseFloat(document.getElementById("hours").value);
-      if (isNaN(hours) || hours < 0) {
-        alert("Please enter a valid number.");
+    // Correct formula: years = (dailyHours / 24) * 85  = dailyHours * 85 / 24
+    function computeYearsFor85(dailyHours) {
+      return (dailyHours * 85) / 24;
+    }
+
+    const calcBtn = document.getElementById('calcBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const resultP = document.getElementById('result');
+
+    calcBtn.addEventListener('click', () => {
+      const inputVal = document.getElementById('dailyHours').value;
+      const dailyHours = parseFloat(inputVal);
+
+      if (isNaN(dailyHours) || dailyHours < 0) {
+        resultP.textContent = "Please enter a valid non-negative number.";
+        nextBtn.style.display = 'none';
+        nextBtn.setAttribute('aria-hidden','true');
         return;
       }
 
-      const years = (hours * 365 * 85) / 24;
+      // compute years correctly
+      const years = computeYearsFor85(dailyHours);
+      const roundedYears = Number(years.toFixed(2));
 
-      const msg = `At ${hours} hours a day, you will spend ${years.toFixed(2)} years of an 85 year lifetime.`;
+      // Save value for revolution page and other uses
+      localStorage.setItem('screenYears', roundedYears);
 
-      document.getElementById("resultMessage").innerText = msg;
+      // Show the requested message (exact format)
+      resultP.textContent = `At ${dailyHours} hours a day, you will spend ${roundedYears} years of an 85-year lifetime.`;
 
-      // store years for next page
-      localStorage.setItem("calculatedYears", years.toFixed(2));
+      // Reveal Next button (user must click to proceed)
+      nextBtn.style.display = 'inline-block';
+      nextBtn.setAttribute('aria-hidden','false');
+    });
 
-      // redirect after a pause
-      setTimeout(() => {
-        window.location.href = "revolution.html";
-      }, 3200);
-    }
+    // Next button navigates the user to revolution.html
+    nextBtn.addEventListener('click', () => {
+      window.location.href = '/revolution.html';
+    });
+
+    // Accessibility: allow Enter on input to trigger calculation
+    document.getElementById('dailyHours').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        calcBtn.click();
+      }
+    });
   </script>
-
 </body>
 </html>
