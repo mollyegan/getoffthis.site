@@ -74,19 +74,14 @@
 
 <div class="content-wrapper">
 
-  <!-- LEFT SIDE: ZINE GRID -->
-  <div class="zine-grid">
-    <img src="assets/zine/0001.png" alt="">
-    <img src="assets/zine/0002.png" alt="">
-    <img src="assets/zine/0003.png" alt="">
-    <img src="assets/zine/0004.png" alt="">
-    <img src="assets/zine/0005.png" alt="">
-    <img src="assets/zine/0006.png" alt="">
-    <img src="assets/zine/0007.png" alt="">
-    <img src="assets/zine/0008.png" alt="">
-    <img src="assets/zine/0009.png" alt="">
-    <img src="assets/zine/00010.png" alt="">
+<div class="zine-viewer">
+  <img id="zineImage" src="/assets/zine/0001.png" alt="Zine page">
+
+  <div class="zine-controls">
+    <button id="prevBtn">←</button>
+    <button id="nextBtn">→</button>
   </div>
+</div>
 
   <!-- RIGHT SIDE: TEXT -->
 <div class="revolution-container">
@@ -128,6 +123,38 @@
         document.getElementById("years-placeholder").textContent = yrs;
     }
   </script>
+
+  <script>
+const images = [
+  "/assets/zine/0001.png",
+  "/assets/zine/0002.png",
+  "/assets/zine/0003.png",
+  "/assets/zine/0004.png",
+  "/assets/zine/0005.png",
+  "/assets/zine/0006.png",
+  "/assets/zine/0007.png",
+  "/assets/zine/0008.png",
+  "/assets/zine/0009.png",
+  "/assets/zine/0010.png"
+];
+
+let index = 0;
+
+const imgElement = document.getElementById("zineImage");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+prevBtn.addEventListener("click", () => {
+  index = (index - 1 + images.length) % images.length;
+  imgElement.src = images[index];
+});
+
+nextBtn.addEventListener("click", () => {
+  index = (index + 1) % images.length;
+  imgElement.src = images[index];
+});
+</script>
+
 </body>
 </html>
 
