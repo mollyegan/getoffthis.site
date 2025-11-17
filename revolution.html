@@ -116,13 +116,16 @@
   </div>
 
 </div>
- <script>
-    const yrs = localStorage.getItem("screenYears");
+<script>
+  const yrs = localStorage.getItem("screenYears");
 
-    if (yrs) {
-        document.getElementById("years-placeholder").textContent = yrs;
-    }
-  </script>
+  if (yrs) {
+      document.querySelectorAll(".yearsVal").forEach(el => {
+          el.textContent = yrs;
+      });
+  }
+</script>
+
 
   <script>
 const images = [
