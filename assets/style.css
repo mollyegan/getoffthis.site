@@ -99,7 +99,7 @@ body{background:var(--bg-color);color:#222;}
 
 /* Keep zine visuals the same */
 .zine-viewer img {
-  width: 100%;
+  width: 80%;
   height: auto;
   border: 1px solid #000;
   border-radius: 6px;
