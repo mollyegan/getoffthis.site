@@ -84,23 +84,38 @@ body{background:var(--bg-color);color:#222;}
 }
 
 
-.zine-title {
-  font-family: 'VT323', monospace;
-  font-size: 48px;
-  margin-bottom: 24px;
+.zine-viewer {
+  width: 45%;
+  float: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 40px;
 }
 
-.zine-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.zine-gallery img {
+.zine-viewer img {
   width: 100%;
+  height: auto;
+  border: 1px solid #000;
   border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
+
+.zine-controls {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.zine-controls button {
+  font-family: "VT323", monospace;
+  font-size: 28px;
+  padding: 4px 14px;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 4px;
+  background: white;
+}
+
 
 .home-layout {
   display: flex;
