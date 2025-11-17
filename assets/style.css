@@ -6,10 +6,13 @@
 html,body{height:100%;margin:0;font-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
 body{background:var(--bg-color);color:#222;}
 /* Make revolution text full-width and centered */
-.revolution-container {
-  width: 60%;
-  margin-left: auto;     /* pushes content to the right side */
-  padding-right: 40px;
+.revolution-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;     /* controls spacing between image + text */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
 }
 
 .revolution-text {
@@ -85,13 +88,12 @@ body{background:var(--bg-color);color:#222;}
 
 
 .zine-viewer {
-  width: 45%;
-  float: left;
+  width: 40%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 40px;
 }
+
 
 .zine-viewer img {
   width: 100%;
