@@ -121,7 +121,13 @@
   </div>
 
 </div>
+ <script>
+    const yrs = localStorage.getItem("screenYears");
 
+    if (yrs) {
+        document.getElementById("years-placeholder").textContent = yrs;
+    }
+  </script>
 </body>
 </html>
 
