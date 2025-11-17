@@ -1,69 +1,97 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Revolution — getoffthis.site</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revolution</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- Optional global stylesheet -->
-  <link rel="stylesheet" href="/assets/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
 
   <style>
-    .site-header {
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding:18px 12px;
-      border-bottom:1px solid rgba(0,0,0,0.06);
+    body {
+      margin: 0;
+      padding: 0;
+      background: white;
+      color: black;
+      font-family: "IBM Plex Mono", monospace;
     }
-    .logo-text {
-      font-family: 'VT323', monospace;
-      font-size: 60px; /* consistent header size across pages */
-      line-height: 1;
-      color: #111;
+
+    /* Header */
+    header {
+      width: 100%;
+      text-align: center;
+      padding: 20px 0 10px 0;
+    }
+
+    header a {
+      font-family: "VT323", monospace;
+      font-size: 40px;
       text-decoration: none;
+      color: black;
     }
 
-    .site-main {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 18px;
+    /* Layout container */
+    .content-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* left = grid of zines, right = text */
+      gap: 40px;
+      width: 90%;
+      margin: auto;
+      margin-top: 30px;
+      align-items: start;
     }
 
-    .revolution-text {
-      font-family: 'IBM Plex Mono', monospace; /* requested font */
-      font-size: 18.5px;
-      line-height: 1.7;
-      color: #111;
-      text-align: left;
+    /* Zine grid on the left */
+    .zine-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2 columns */
+      grid-auto-rows: auto;
+      gap: 20px;
     }
 
-    /* Responsive padding */
-    @media (max-width: 700px) {
-      .site-main { margin: 24px 12px; }
-      .revolution-text { font-size: 17px; }
-      .logo-text { font-size: 34px; }
+    .zine-grid img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid black;
     }
+
+    /* Text on the right */
+    .text-section {
+      text-align: right;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
   </style>
 </head>
-
 <body>
-  <header class="site-header">
-    <a class="logo-link" href="/">
-      <span class="logo-text">getoffthis.site</span>
-    </a>
-  </header>
 
-  <main class="site-main">
-    <p><a href="/zine.html">See our Zine →</a></p>
+<header>
+  <a href="index.html">getoffthis.site</a>
+</header>
 
-    <article class="revolution-text" id="revolutionArticle">
-      <!-- exact text you provided, with span wrappers for all '12' placeholders -->
-      <p>
+<div class="content-wrapper">
+
+  <!-- LEFT SIDE: ZINE GRID -->
+  <div class="zine-grid">
+    <img src="zine/0001.png" alt="">
+    <img src="zine/0002.png" alt="">
+    <img src="zine/0003.png" alt="">
+    <img src="zine/0004.png" alt="">
+    <img src="zine/0005.png" alt="">
+    <img src="zine/0006.png" alt="">
+    <img src="zine/0007.png" alt="">
+    <img src="zine/0008.png" alt="">
+    <img src="zine/0009.png" alt="">
+    <img src="zine/00010.png" alt="">
+  </div>
+
+  <!-- RIGHT SIDE: TEXT -->
+  <div class="text-section">
+    <h2>The Revolution</h2>
+       <p>
         <span class="yearsVal">12</span> years on earth. Imagine the younger you, on the cusp of teenage-hood. It has been <span class="yearsVal">12</span> years, and what have you accomplished?
       </p>
 
@@ -90,20 +118,14 @@
       <p>
         We are the Harvard College Neo-Luddites.
       </p>
-    </article>
-  </main>
+  </div>
 
-  <script>
-    // On load, replace the placeholders with the stored value (if present)
-    document.addEventListener('DOMContentLoaded', () => {
-      const stored = localStorage.getItem('screenYears');
-      if (!stored) return; // if nothing stored, leave the '12' text as-is
+</div>
 
-      // Replace every span.yearsVal with the stored number
-      document.querySelectorAll('.yearsVal').forEach(span => {
-        span.textContent = stored;
-      });
-    });
-  </script>
 </body>
 </html>
+
+
+
+
+
