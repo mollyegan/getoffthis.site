@@ -9,20 +9,24 @@ body{background:var(--bg-color);color:#222;}
 .revolution-section {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
-  max-width: 1200px;
+  justify-content: center;
+  width: 100%;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 20px;     /* smaller padding = less space */
-  column-gap: 10px;  /* much tighter spacing */
+  padding: 20px;
+  gap: 0; /* removes the gap between columns */
 }
 
-
+/* Left side: text */
 .revolution-text {
-  width: 60%;        /* explicitly control width */
-  text-align: left;
+  flex: 1;
+  max-width: 50%;
   font-family: "IBM Plex Mono", monospace;
   font-size: 23px;
   line-height: 1.55;
+  text-align: left;
+  margin: 0;     /* remove default browser margins */
+  padding-right: 20px; /* small, intentional spacing */
 }
 
 
@@ -92,25 +96,29 @@ body{background:var(--bg-color);color:#222;}
 
 
 .zine-viewer {
-  width: 32%;        /* smaller column = tighter spacing */
+  flex: 1;
+  max-width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0;     /* removes unwanted spacing */
+  padding-left: 20px; /* small, intentional spacing */
 }
 
-
-
+/* Zine image stays big */
 .zine-viewer img {
   width: 100%;
   height: auto;
   border: 1px solid #000;
   border-radius: 6px;
+  display: block;
 }
 
+/* Next / Prev buttons */
 .zine-controls {
-  margin-top: 10px;
+  margin-top: 12px;
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .zine-controls button {
@@ -122,8 +130,6 @@ body{background:var(--bg-color);color:#222;}
   border-radius: 4px;
   background: white;
 }
-
-
 .home-layout {
   display: flex;
   flex-direction: row;
