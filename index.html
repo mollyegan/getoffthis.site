@@ -37,62 +37,65 @@
     }
 
     /* Calculator box */
-    .screen-time-calculator {
-      font-family: 'VT323', monospace;
-      font-size: 20px;
-      background: #000;
-      color: #fff;
-      padding: 22px;
-      border-radius: 8px;
-      max-width: 420px;
-      margin: 28px auto 0;
-      text-align: center;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.15);
-    }
+  /* Calculator box — doubled size */
+.screen-time-calculator {
+  font-family: 'VT323', monospace;
+  font-size: 32px;          /* bigger text */
+  background: #000;
+  color: #fff;
+  padding: 40px;            /* bigger box */
+  border-radius: 12px;
+  max-width: 720px;         /* ~2x wider */
+  margin: 50px auto 0;      /* still centered */
+  text-align: center;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.20);
+}
 
-    .screen-time-calculator label {
-      display:block;
-      margin-bottom:8px;
-      font-size:18px;
-    }
+.screen-time-calculator label {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 28px;          /* larger label text */
+}
 
-    .screen-time-calculator input {
-      width: 88%;
-      padding: 8px;
-      font-size: 18px;
-      border-radius: 6px;
-      border: 1px solid #333;
-      margin-bottom: 12px;
-      background:#111;
-      color:#fff;
-    }
+.screen-time-calculator input {
+  width: 90%;
+  padding: 14px;            /* bigger input */
+  font-size: 26px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  margin-bottom: 20px;
+  background: #111;
+  color: #fff;
+}
 
-    .screen-time-calculator button {
-      font-family: 'VT323', monospace;
-      font-size: 18px;
-      padding: 10px 16px;
-      border-radius: 6px;
-      border: 1px solid #fff;
-      background: #111;
-      color: #fff;
-      cursor: pointer;
-    }
+.screen-time-calculator button {
+  font-family: 'VT323', monospace;
+  font-size: 28px;          /* bigger button text */
+  padding: 14px 22px;
+  border-radius: 8px;
+  border: 1px solid #fff;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+}
 
-    .screen-time-calculator .next-btn {
-      display: inline-block;
-      margin-top: 14px;
-      background: #2b2b2b;
-      border: 1px solid #fff;
-      padding: 10px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
+.screen-time-calculator .next-btn {
+  display: inline-block;
+  margin-top: 20px;
+  background: #2b2b2b;
+  border: 1px solid #fff;
+  padding: 14px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 28px;
+}
 
-    .screen-time-calculator #result {
-      margin-top: 16px;
-      font-size: 18px;
-      min-height: 44px;
-    }
+.screen-time-calculator #result {
+  margin-top: 22px;
+  font-size: 32px;          /* bigger result text */
+  min-height: 60px;         /* ensures space before next button */
+}
+
 
     /* Keep layout comfortable on small screens */
     @media (max-width: 700px) {
