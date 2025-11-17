@@ -21,7 +21,7 @@ body{background:var(--bg-color);color:#222;}
   width: 55%;                      /* text > half the space */
   text-align: left;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 15px;                 /* slightly smaller, as you asked */
+  font-size: 13px;                 /* slightly smaller, as you asked */
   line-height: 1.55;
 }
 
