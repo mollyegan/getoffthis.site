@@ -23,12 +23,15 @@
   </div>
 
   <div class="header-right">
-    <a href="Yhttps://docs.google.com/forms/d/e/1FAIpQLSdkRDHcI3Jfb0HMWe-qxhoFldKTY5vA--lhIJJsCxQ8GEPTSw/viewform?usp=dialog" target="_blank" class="join-btn">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdkRDHcI3Jfb0HMWe-qxhoFldKTY5vA--lhIJJsCxQ8GEPTSw/viewform?usp=dialog" 
+       target="_blank" class="join-btn">
       Join the movement
     </a>
   </div>
 </header>
 
+<!-- ⭐️ FIXED: CONTENT WRAPPER ADDED -->
+<main class="site-main">
 
 <!-- PAGE CONTENT: ZINE LEFT / TEXT RIGHT -->
 <div class="revolution-section">
@@ -43,12 +46,13 @@
     </div>
   </div>
 
+  <!-- Button inside the content area (optional) -->
   <div class="join-movement-container">
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdkRDHcI3Jfb0HMWe-qxhoFldKTY5vA--lhIJJsCxQ8GEPTSw/viewform?usp=dialog" target="_blank" class="join-btn">
-    Join the movement
-  </a>
-</div>
-
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdkRDHcI3Jfb0HMWe-qxhoFldKTY5vA--lhIJJsCxQ8GEPTSw/viewform?usp=dialog"
+       target="_blank" class="join-btn">
+      Join the movement
+    </a>
+  </div>
 
   <!-- RIGHT: TEXT -->
   <div class="revolution-text">
@@ -87,13 +91,13 @@
 
     <p>We are the Harvard College Neo-Luddites.</p>
   </div>
+
 </div>
+</main> <!-- ⭐️ END WRAPPER -->
 
 <!-- SCRIPT: FILL IN YEARS BASED ON CALCULATOR -->
 <script>
   const yrs = localStorage.getItem("screenYears");
-
-  // Select all <span class="yearsVal">
   const spans = document.querySelectorAll(".yearsVal");
 
   if (yrs) {
