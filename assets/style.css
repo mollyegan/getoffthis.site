@@ -89,6 +89,31 @@ body{background:var(--bg-color);color:#222;}
   color: #fff;           /* WHITE RESULT TEXT */
 }
 
+.join-movement-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.join-btn {
+  font-family: 'VT323', monospace;
+  font-size: 24px;
+  padding: 14px 26px;
+  background: #111;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  transition: 0.25s;
+}
+
+.join-btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+
 
 .zine-viewer {
   width: 40%;                      /* keep original size */
