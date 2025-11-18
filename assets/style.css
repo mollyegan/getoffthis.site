@@ -1,57 +1,148 @@
 /* assets/style.css */
-:root{
-  --logo-color:#111;
-  --bg-color:#fff;
+:root {
+  --logo-color: #111;
+  --bg-color: #fff;
 }
-html,body{height:100%;margin:0;font-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
-body{background:var(--bg-color);color:#222;}
-/* Make revolution text full-width and centered */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+body {
+  background: var(--bg-color);
+  color: #222;
+}
+
+/* ============= PAGE LAYOUT ============= */
+
 .revolution-section {
   display: flex;
   align-items: flex-start;
-  justify-content: flex-start;     /* push both columns left */
+  justify-content: flex-start;
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px 10px;
-  column-gap: 25px;                /* tight spacing */
+  column-gap: 25px;
 }
 
-/* --- RIGHT SIDE TEXT --- */
+/* Right side text */
 .revolution-text {
-  width: 55%;                      /* text > half the space */
+  width: 55%;
   text-align: left;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 14px;                 /* slightly smaller, as you asked */
+  font-size: 14px;
   line-height: 1.55;
 }
 
-.site-header{display:flex;align-items:center;justify-content:center;padding:28px 16px;border-bottom:1px solid rgba(0,0,0,0.06);} 
-.logo-link{display:inline-block;text-decoration:none;}
-.logo-text{
+/* ============= HEADER ============= */
+
+.site-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;        /* EXTRA SPACE between logo + button */
+  padding: 28px 16px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.logo-link {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.logo-text {
   font-family: 'VT323', monospace;
-  font-weight:400;
-  color:var(--logo-color);
+  font-weight: 400;
+  color: var(--logo-color);
   font-size: 60px;
-  line-height:1;
-  letter-spacing:0.5px;
-  text-transform:none;
-  display:inline-block;
-  padding:6px 12px;
-  background:rgba(255,255,255,0.6);
-  border-radius:6px;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  padding: 6px 12px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
-.site-main{max-width:900px;margin:48px auto;padding:0 16px;}
+
+/* ============= RED JOIN BUTTON (header only) ============= */
+
+.join-btn {
+  font-family: 'VT323', monospace;
+  font-size: 24px;
+  padding: 14px 26px;
+  background: #cc0000;       /* RED */
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.join-btn:hover {
+  background: #ff3333;       /* lighter red */
+  color: #fff;
+}
+
+/* ============= ZINE VIEWER ============= */
+
+.zine-viewer {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.zine-viewer img {
+  width: 80%;
+  height: auto;
+  border: 1px solid #000;
+  border-radius: 6px;
+}
+
+.zine-controls {
+  margin-top: 12px;
+  display: flex;
+  gap: 12px;
+}
+
+.zine-controls button {
+  font-family: "VT323", monospace;
+  font-size: 28px;
+  padding: 4px 14px;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 4px;
+  background: white;
+}
+
+/* ============= HOME LAYOUT ============= */
+
+.home-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.home-text {
+  flex: 2;
+  max-width: 600px;
+}
+
+/* Calculator */
 .screen-time-calculator {
+  flex: 1;
   font-family: 'VT323', monospace;
   font-size: 22px;
   background: #000;
-  color: #fff;            /* WHITE TEXT */
+  color: #fff;
   padding: 20px;
   border-radius: 8px;
-  max-width: 400px;
-  margin: 40px auto;      /* CENTER ON PAGE */
-  text-align: center;     /* CENTER TEXT */
+  max-width: 350px;
+  text-align: center;
 }
 
 .screen-time-calculator label {
@@ -73,7 +164,7 @@ body{background:var(--bg-color);color:#222;}
   padding: 6px 18px;
   cursor: pointer;
   background: #222;
-  color: #fff;           /* WHITE BUTTON TEXT */
+  color: #fff;
   border: 1px solid #fff;
   border-radius: 4px;
   margin-top: 12px;
@@ -86,93 +177,13 @@ body{background:var(--bg-color);color:#222;}
 .screen-time-calculator #result {
   margin-top: 18px;
   font-size: 24px;
-  color: #fff;           /* WHITE RESULT TEXT */
-}
-
-.join-movement-container {
-  text-align: center;
-  margin-top: 30px;
-}
-
-.join-btn {
-  font-family: 'VT323', monospace;
-  font-size: 24px;
-  padding: 14px 26px;
-  background: #111;
   color: #fff;
-  border: 2px solid #fff;
-  border-radius: 8px;
-  text-decoration: none;
-  cursor: pointer;
-  display: inline-block;
-  transition: 0.25s;
 }
 
-.join-btn:hover {
-  background: #fff;
-  color: #000;
-}
+/* ============= MOBILE ============= */
 
-
-
-.zine-viewer {
-  width: 40%;                      /* keep original size */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Keep zine visuals the same */
-.zine-viewer img {
-  width: 80%;
-  height: auto;
-  border: 1px solid #000;
-  border-radius: 6px;
-}
-
-/* --- BUTTONS --- */
-.zine-controls {
-  margin-top: 12px;
-  display: flex;
-  gap: 12px;
-}
-
-.zine-controls button {
-  font-family: "VT323", monospace;
-  font-size: 28px;
-  padding: 4px 14px;
-  cursor: pointer;
-  border: 1px solid black;
-  border-radius: 4px;
-  background: white;
-}
-.home-layout {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 40px;
-  margin-top: 40px;
-}
-
-/* Left column */
-.home-text {
-  flex: 2;
-  max-width: 600px;
-}
-
-/* Right column — calculator */
-.screen-time-calculator {
-  flex: 1;
-  font-family: 'VT323', monospace;
-  font-size: 22px;
-  background: #000;
-  color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 350px;
-  text-align: center;
-}
 @media (max-width: 800px) {
+
   .home-layout {
     flex-direction: column;
     align-items: center;
@@ -182,41 +193,31 @@ body{background:var(--bg-color);color:#222;}
   .screen-time-calculator {
     max-width: 100%;
   }
-  /* Header layout: logo left, button right, but entire header centered on the page */
-.site-header {
-  display: flex;
-  justify-content: center;  /* centers the entire header module */
-  align-items: center;
-  gap: 24px;                 /* space between logo and button */
-  padding: 18px 12px;
+
+  /* Centered header for mobile */
+  .site-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;      /* mobile spacing */
+    padding: 18px 12px;
+  }
+
+  .header-left,
+  .header-right {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Mobile button stays red */
+  .join-btn {
+    font-size: 22px;
+    padding: 10px 22px;
+    background: #cc0000;
+    border: 2px solid #fff;
+  }
+
+  .join-btn:hover {
+    background: #ff3333;
+  }
 }
-
-/* Group logo + button into a centered line */
-.header-left,
-.header-right {
-  display: flex;
-  align-items: center;
-}
-
-/* Button styling */
-.join-btn {
-  font-family: 'VT323', monospace;
-  font-size: 22px;
-  padding: 10px 20px;
-  background: #111;
-  color: #fff;
-  border: 2px solid #fff;
-  border-radius: 8px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.join-btn:hover {
-  background: #fff;
-  color: #000;
-}
-
-}
-
-
