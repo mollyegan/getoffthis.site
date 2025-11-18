@@ -112,7 +112,7 @@
     </a>
   </header>
 
-   <section class="screen-time-calculator" aria-labelledby="calcHeading">
+  <section class="screen-time-calculator" aria-labelledby="calcHeading">
   <h2 id="calcHeading" style="margin:0 0 12px;">Lifetime Screen Time Calculator</h2>
 
   <label for="dailyHours">Average Daily Screen Time (hours):</label>
@@ -120,9 +120,6 @@
 
   <label for="firstAge">Age you first got a smartphone:</label>
   <input type="number" id="firstAge" min="0" placeholder="e.g. 12">
-
-  <label for="lifespan">Your expected lifespan (years):</label>
-  <input type="number" id="lifespan" min="1" placeholder="e.g. 85">
 
   <div>
     <button id="calcBtn">Calculate</button>
@@ -132,13 +129,16 @@
   <p id="result"></p>
 </section>
 
+
   </main>
 
 <script>
-  function calculateLifetimeYears(dailyHours, firstAge, lifespan) {
-    const yearsOfUse = lifespan - firstAge;      // how many years you'll own a smartphone
+  const LIFESPAN = 85;   // fixed assumed lifespan
+
+  function calculateLifetimeYears(dailyHours, firstAge) {
+    const yearsOfUse = LIFESPAN - firstAge;
     const totalHours = dailyHours * 365 * yearsOfUse;
-    return totalHours / (365 * 24);              // convert hours → years
+    return totalHours / (365 * 24);   // convert hours → years
   }
 
   const calcBtn = document.getElementById('calcBtn');
@@ -148,29 +148,26 @@
   calcBtn.addEventListener('click', () => {
     const dailyHours = parseFloat(document.getElementById('dailyHours').value);
     const firstAge = parseFloat(document.getElementById('firstAge').value);
-    const lifespan = parseFloat(document.getElementById('lifespan').value);
 
-    // Validate inputs
-    if (isNaN(dailyHours) || isNaN(firstAge) || isNaN(lifespan)) {
-      resultP.textContent = "Please fill in all fields.";
+    // validations
+    if (isNaN(dailyHours) || dailyHours < 0 ||
+        isNaN(firstAge)   || firstAge < 0 || firstAge >= LIFESPAN) {
+      resultP.textContent = "Please enter valid values.";
       nextBtn.style.display = 'none';
       return;
     }
 
-    if (lifespan <= firstAge) {
-      resultP.textContent = "Expected lifespan must be greater than the age you first got a smartphone.";
-      nextBtn.style.display = 'none';
-      return;
-    }
+    const totalYears = calculateLifetimeYears(dailyHours, firstAge);
+    const roundedYears = Number(totalYears.toFixed(2));
 
-    const totalYears = calculateLifetimeYears(dailyHours, firstAge, lifespan);
-    const rounded = Number(totalYears.toFixed(2));
+    const percent = ((roundedYears / LIFESPAN) * 100).toFixed(1);
 
-    // Save for revolution page
-    localStorage.setItem('screenYears', rounded);
+    // Save for the revolution page
+    localStorage.setItem('screenYears', roundedYears);
 
+    // Output message (formatted exactly as you want)
     resultP.textContent =
-      `At ${dailyHours} hours a day, you will spend ${rounded} years of your lifetime using a smartphone.`;
+      `At ${dailyHours} hours a day since age ${firstAge}, you will spend ${roundedYears} years on a smartphone over an 85-year lifetime — about ${percent}% of your life.`;
 
     nextBtn.style.display = 'inline-block';
   });
@@ -179,6 +176,7 @@
     window.location.href = '/revolution.html';
   });
 </script>
+
 
 </body>
 </html>
