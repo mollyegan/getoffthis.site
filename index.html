@@ -112,51 +112,83 @@
     </a>
   </header>
 
-<div class="screen-time-calculator">
-  <label>Daily Screen Time (in hours):</label>
-  <input id="hours" type="number" min="0" step="0.1">
+<section class="screen-time-calculator" aria-labelledby="calcHeading">
+  <h2 id="calcHeading" style="margin:0 0 12px;">Lifetime Screen Time Calculator</h2>
 
-  <label>Age You Got Your First Smartphone:</label>
-  <input id="startAge" type="number" min="0" max="85">
+  <label for="dailyHours">Average Daily Screen Time (hours):</label>
+  <input type="number" id="dailyHours" min="0" step="0.1" placeholder="e.g. 6" aria-label="Average daily screen time in hours">
 
-  <button onclick="calculateScreenTime()">Calculate</button>
+  <label for="smartphoneAge">How old were you when you got your first smartphone?</label>
+  <input type="number" id="smartphoneAge" min="0" step="1" placeholder="e.g. 10">
 
-  <div id="result"></div>
-</div>
+  <div>
+    <button id="calcBtn" aria-describedby="result">Calculate</button>
+    <button id="nextBtn" class="next-btn" style="display:none;" aria-hidden="true">Next →</button>
+  </div>
+
+  <p id="result" role="status" aria-live="polite"></p>
+</section>
+
 
 
   </main>
 
 <script>
-function calculateScreenTime() {
-  const hoursPerDay = parseFloat(document.getElementById("hours").value);
-  const startAge = parseFloat(document.getElementById("startAge").value);
+  const LIFESPAN = 85;
+  const SLEEP_HOURS = 8;
 
-  if (isNaN(hoursPerDay) || hoursPerDay < 0 || isNaN(startAge) || startAge < 0) {
-    document.getElementById("result").innerHTML = "Please enter valid numbers.";
-    return;
+  function predictLifetimeYears(dailyHours, smartphoneAge) {
+    const yearsOfUse = LIFESPAN - smartphoneAge;
+    const dailyFraction = dailyHours / 24;
+    return yearsOfUse * dailyFraction;
   }
 
-  const lifespan = 85; // fixed assumption
-  const yearsUsingPhone = lifespan - startAge;
+  function wakingLifePercentage(dailyHours) {
+    return (dailyHours / (24 - SLEEP_HOURS)) * 100;
+  }
 
-  // Total years spent on phone
-  const totalHours = hoursPerDay * 365 * yearsUsingPhone;
-  const totalYears = totalHours / 24 / 365;
+  const calcBtn = document.getElementById('calcBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const resultP = document.getElementById('result');
 
-  // Percent of waking life
-  const wakingHoursPerDay = 16;          // 24 - 8 sleep hours
-  const totalWakingHours = wakingHoursPerDay * 365 * lifespan;
-  const percentWakingLife = (totalHours / totalWakingHours) * 100;
+  calcBtn.addEventListener('click', () => {
+    const dailyHours = parseFloat(document.getElementById('dailyHours').value);
+    const smartphoneAge = parseFloat(document.getElementById('smartphoneAge').value);
 
-  document.getElementById("result").innerHTML =
-    `If you keep using your phone for ${hoursPerDay} hours per day, ` +
-    `you will spend <strong>${totalYears.toFixed(2)}</strong> years ` +
-    `on a smartphone over an 85-year lifetime.<br><br>` +
-    `That amounts to <strong>${percentWakingLife.toFixed(1)}%</strong> ` +
-    `of your total waking life.`;
-}
+    if (isNaN(dailyHours) || dailyHours < 0 || isNaN(smartphoneAge) || smartphoneAge < 0) {
+      resultP.textContent = "Please enter valid non-negative numbers.";
+      nextBtn.style.display = 'none';
+      nextBtn.setAttribute('aria-hidden', 'true');
+      return;
+    }
+
+    const predictedYears = predictLifetimeYears(dailyHours, smartphoneAge);
+    const roundedYears = Number(predictedYears.toFixed(2));
+
+    const percentWaking = wakingLifePercentage(dailyHours).toFixed(1);
+
+    localStorage.setItem('screenYears', roundedYears);
+
+    resultP.textContent =
+      `You will spend approximately ${roundedYears} years on a smartphone over an 85-year lifetime. ` +
+      `That's about ${percentWaking}% of your waking life.`;
+
+    nextBtn.style.display = 'inline-block';
+    nextBtn.setAttribute('aria-hidden', 'false');
+  });
+
+  nextBtn.addEventListener('click', () => {
+    window.location.href = '/revolution.html';
+  });
+
+  document.getElementById('dailyHours').addEventListener('keydown', e => {
+    if (e.key === 'Enter') calcBtn.click();
+  });
+  document.getElementById('smartphoneAge').addEventListener('keydown', e => {
+    if (e.key === 'Enter') calcBtn.click();
+  });
 </script>
+
 
 
 
