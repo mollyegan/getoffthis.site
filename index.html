@@ -112,70 +112,52 @@
     </a>
   </header>
 
-  <section class="screen-time-calculator" aria-labelledby="calcHeading">
-  <h2 id="calcHeading" style="margin:0 0 12px;">Lifetime Screen Time Calculator</h2>
+<div class="screen-time-calculator">
+  <label>Daily Screen Time (in hours):</label>
+  <input id="hours" type="number" min="0" step="0.1">
 
-  <label for="dailyHours">Average Daily Screen Time (hours):</label>
-  <input type="number" id="dailyHours" min="0" step="0.1" placeholder="e.g. 6">
+  <label>Age You Got Your First Smartphone:</label>
+  <input id="startAge" type="number" min="0" max="85">
 
-  <label for="firstAge">Age you first got a smartphone:</label>
-  <input type="number" id="firstAge" min="0" placeholder="e.g. 12">
+  <button onclick="calculateScreenTime()">Calculate</button>
 
-  <div>
-    <button id="calcBtn">Calculate</button>
-    <button id="nextBtn" class="next-btn" style="display:none;">Next →</button>
-  </div>
-
-  <p id="result"></p>
-</section>
+  <div id="result"></div>
+</div>
 
 
   </main>
 
 <script>
-  const LIFESPAN = 85;   // fixed assumed lifespan
+function calculateScreenTime() {
+  const hoursPerDay = parseFloat(document.getElementById("hours").value);
+  const startAge = parseFloat(document.getElementById("startAge").value);
 
-  function calculateLifetimeYears(dailyHours, firstAge) {
-    const yearsOfUse = LIFESPAN - firstAge;
-    const totalHours = dailyHours * 365 * yearsOfUse;
-    return totalHours / (365 * 24);   // convert hours → years
+  if (isNaN(hoursPerDay) || hoursPerDay < 0 || isNaN(startAge) || startAge < 0) {
+    document.getElementById("result").innerHTML = "Please enter valid numbers.";
+    return;
   }
 
-  const calcBtn = document.getElementById('calcBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const resultP = document.getElementById('result');
+  const lifespan = 85; // fixed assumption
+  const yearsUsingPhone = lifespan - startAge;
 
-  calcBtn.addEventListener('click', () => {
-    const dailyHours = parseFloat(document.getElementById('dailyHours').value);
-    const firstAge = parseFloat(document.getElementById('firstAge').value);
+  // Total years spent on phone
+  const totalHours = hoursPerDay * 365 * yearsUsingPhone;
+  const totalYears = totalHours / 24 / 365;
 
-    // validations
-    if (isNaN(dailyHours) || dailyHours < 0 ||
-        isNaN(firstAge)   || firstAge < 0 || firstAge >= LIFESPAN) {
-      resultP.textContent = "Please enter valid values.";
-      nextBtn.style.display = 'none';
-      return;
-    }
+  // Percent of waking life
+  const wakingHoursPerDay = 16;          // 24 - 8 sleep hours
+  const totalWakingHours = wakingHoursPerDay * 365 * lifespan;
+  const percentWakingLife = (totalHours / totalWakingHours) * 100;
 
-    const totalYears = calculateLifetimeYears(dailyHours, firstAge);
-    const roundedYears = Number(totalYears.toFixed(2));
-
-    const percent = ((roundedYears / LIFESPAN) * 100).toFixed(1);
-
-    // Save for the revolution page
-    localStorage.setItem('screenYears', roundedYears);
-
-    // Output message (formatted exactly as you want)
-    resultP.textContent =
-      `At ${dailyHours} hours a day since age ${firstAge}, you will spend ${roundedYears} years on a smartphone over an 85-year lifetime — about ${percent}% of your life.`;
-
-    nextBtn.style.display = 'inline-block';
-  });
-
-  nextBtn.addEventListener('click', () => {
-    window.location.href = '/revolution.html';
-  });
+  document.getElementById("result").innerHTML =
+    `If you keep using your phone for ${hoursPerDay} hours per day, ` +
+    `you will spend <strong>${totalYears.toFixed(2)}</strong> years ` +
+    `on a smartphone over an 85-year lifetime.<br><br>` +
+    `That amounts to <strong>${percentWakingLife.toFixed(1)}%</strong> ` +
+    `of your total waking life.`;
+}
 </script>
+
 
 
 </body>
